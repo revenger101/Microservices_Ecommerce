@@ -62,25 +62,12 @@ Edit
 
 ## 📁 Project Structure
 
-ecommerce-platform/
-├── api-gateway/
-│ ├── graphql/
-│ └── rest/
-├── user-service/
-│ ├── models.py
-│ ├── grpc/
-│ └── proto/
-├── order-service/
-│ ├── models.py
-│ ├── grpc/
-│ └── proto/
-├── ml-load-predictor/
-├── docker-compose.yml
-├── Dockerfiles/
-├── proto-definitions/
-├── docs/
-│ ├── API.md
-│ └── setup.md
+ecommerce/
+├── api_gateway/          
+├── user_service/         
+├── order_service/       
+├── protos/              
+├── docker-compose.yml   
 └── README.md
 
 
