@@ -209,6 +209,9 @@ Concurrent Users	1000
 Avg Response Time	180ms
 Max Response Time	950ms
 90% Under	200ms
+docker-compose exec user_service python manage.py test
+docker-compose exec order_service python manage.py test
+docker-compose exec api_gateway python manage.py test
 
 Tested using Locust with Celery in async mode.
 
