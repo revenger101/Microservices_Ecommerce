@@ -98,7 +98,7 @@ ecommerce-platform/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/ecommerce-platform.git
+https://github.com/revenger101/Microservices_Ecommerce.git
 cd ecommerce-platform
 
 # Build and start all services
