@@ -1,0 +1,10 @@
+django 
+djangorestframework
+graphene-django 
+grpcio 
+grpcio-tools 
+protobuf 
+celery 
+redis 
+psycopg2-binary 
+django-filter

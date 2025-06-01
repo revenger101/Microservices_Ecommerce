@@ -1,0 +1,4 @@
+docker-compose build
+docker-compose up
+docker-compose exec user_service python manage.py migrate
+docker-compose exec order_service python manage.py migrate
