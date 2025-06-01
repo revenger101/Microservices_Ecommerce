@@ -208,11 +208,3 @@ MIT License. See LICENSE for details.
 
 
 ---
-
-### ✅ Notes:
-
-- You should update the repository links, names, and contact info with your actual values.
-- You can add badges (e.g., build status, license) and screenshots/GIFs for visual enhancement.
-- Consider splitting this README into multiple files (especially API and CI/CD documentation) for maintainability in larger projects.
-
-Would you like me to generate sample `.proto` files or Dockerfiles next?
