@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'order_service_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'HOST': 'order_db',
         'PORT': '5432',
     }
 }
