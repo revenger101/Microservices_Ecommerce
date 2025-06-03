@@ -89,6 +89,17 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - api_gateway
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+
 volumes:
   user_data:
   order_data:
