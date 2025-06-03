@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛍️ ShopFlow E-Commerce - Demo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .app-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .app-header h1 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav button:hover, .nav button.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .page {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .page h2 {
+            color: #333;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .form-group input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .user-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .user-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .user-avatar {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .success {
+            background: #d1fae5;
+            color: #059669;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .error {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="container">
+            <h1>🛍️ ShopFlow E-Commerce</h1>
+            <nav class="nav">
+                <button onclick="showPage('home')" class="active" id="home-btn">🏠 Home</button>
+                <button onclick="showPage('users')" id="users-btn">👥 Users</button>
+                <button onclick="showPage('products')" id="products-btn">📦 Products</button>
+                <button onclick="showPage('orders')" id="orders-btn">🛒 Orders</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <h2>🚀 Welcome to ShopFlow</h2>
+            <p>A modern microservices-based e-commerce platform built with React, Django, and GraphQL.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>👥 Users</h3>
+                    <div class="stat-number" id="user-count">3</div>
+                </div>
+                <div class="stat-card">
+                    <h3>📦 Products</h3>
+                    <div class="stat-number">25</div>
+                </div>
+                <div class="stat-card">
+                    <h3>🛒 Orders</h3>
+                    <div class="stat-number">12</div>
+                </div>
+                <div class="stat-card">
+                    <h3>💰 Revenue</h3>
+                    <div class="stat-number">$2,450</div>
+                </div>
+            </div>
+
+            <div>
+                <h3>Quick Actions</h3>
+                <button class="action-btn" onclick="createTestOrder()">🛒 Create Test Order</button>
+                <button class="action-btn" onclick="showPage('users')">👥 Manage Users</button>
+                <button class="action-btn" onclick="testAPI()">🔗 Test API Connection</button>
+            </div>
+        </div>
+
+        <!-- Users Page -->
+        <div id="users-page" class="page hidden">
+            <h2>👥 User Management</h2>
+            
+            <div style="background: rgba(102, 126, 234, 0.1); padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                <h3>Create New User</h3>
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Username" />
+                    <input type="email" id="email" placeholder="Email" />
+                    <input type="password" id="password" placeholder="Password" />
+                    <button class="action-btn" onclick="createUser()">✅ Create User</button>
+                </div>
+            </div>
+
+            <div id="users-grid" class="users-grid">
+                <div class="user-card">
+                    <div class="user-avatar">👤</div>
+                    <h4>john</h4>
+                    <p>john@example.com</p>
+                    <small>ID: 1</small>
+                </div>
+                <div class="user-card">
+                    <div class="user-avatar">👤</div>
+                    <h4>jane</h4>
+                    <p>jane@example.com</p>
+                    <small>ID: 2</small>
+                </div>
+                <div class="user-card">
+                    <div class="user-avatar">👤</div>
+                    <h4>alice</h4>
+                    <p>alice@example.com</p>
+                    <small>ID: 3</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Page -->
+        <div id="products-page" class="page hidden">
+            <h2>📦 Product Catalog</h2>
+            <p>Browse our amazing product collection</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <div style="font-size: 4rem; text-align: center; padding: 2rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">🎧</div>
+                    <div style="padding: 1rem;">
+                        <h4>Wireless Headphones</h4>
+                        <p style="color: #10b981; font-size: 1.25rem; font-weight: 700;">$99.99</p>
+                    </div>
+                </div>
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <div style="font-size: 4rem; text-align: center; padding: 2rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">⌚</div>
+                    <div style="padding: 1rem;">
+                        <h4>Smart Watch</h4>
+                        <p style="color: #10b981; font-size: 1.25rem; font-weight: 700;">$299.99</p>
+                    </div>
+                </div>
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <div style="font-size: 4rem; text-align: center; padding: 2rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">☕</div>
+                    <div style="padding: 1rem;">
+                        <h4>Coffee Maker</h4>
+                        <p style="color: #10b981; font-size: 1.25rem; font-weight: 700;">$149.99</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Page -->
+        <div id="orders-page" class="page hidden">
+            <h2>🛒 Order Management</h2>
+            <button class="action-btn" onclick="createTestOrder()">➕ Create Test Order</button>
+            
+            <div style="margin: 2rem 0;">
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4>Order #1</h4>
+                        <span style="background: #fef3c7; color: #d97706; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600;">PENDING</span>
+                    </div>
+                    <p>Customer: John Doe</p>
+                    <p style="color: #10b981; font-weight: 700;">Total: $199.98</p>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4>Order #2</h4>
+                        <span style="background: #d1fae5; color: #059669; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600;">COMPLETED</span>
+                    </div>
+                    <p>Customer: Jane Smith</p>
+                    <p style="color: #10b981; font-weight: 700;">Total: $149.99</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let userCount = 3;
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+            
+            // Show selected page
+            document.getElementById(pageId + '-page').classList.remove('hidden');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(pageId + '-btn').classList.add('active');
+        }
+
+        async function createUser() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !email || !password) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/graphql/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: `mutation { createUser(username: "${username}", email: "${email}", password: "${password}") { success message user { id username email } } }`
+                    }),
+                });
+
+                const result = await response.json();
+                
+                if (result.data?.createUser?.success) {
+                    alert('✅ ' + result.data.createUser.message);
+                    
+                    // Add user to the grid
+                    const usersGrid = document.getElementById('users-grid');
+                    const userCard = document.createElement('div');
+                    userCard.className = 'user-card';
+                    userCard.innerHTML = `
+                        <div class="user-avatar">👤</div>
+                        <h4>${username}</h4>
+                        <p>${email}</p>
+                        <small>ID: ${result.data.createUser.user.id}</small>
+                    `;
+                    usersGrid.appendChild(userCard);
+                    
+                    // Update user count
+                    userCount++;
+                    document.getElementById('user-count').textContent = userCount;
+                    
+                    // Clear form
+                    document.getElementById('username').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('password').value = '';
+                } else {
+                    alert('❌ Failed to create user');
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        async function createTestOrder() {
+            try {
+                const response = await fetch('http://localhost:8000/graphql/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: `mutation { createOrder(userId: 1) { success message order { id status } } }`
+                    }),
+                });
+
+                const result = await response.json();
+                
+                if (result.data?.createOrder?.success) {
+                    alert('✅ ' + result.data.createOrder.message);
+                } else {
+                    alert('❌ Failed to create order');
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        async function testAPI() {
+            try {
+                const response = await fetch('http://localhost:8000/graphql/', {
+                    method: 'GET',
+                });
+
+                const result = await response.json();
+                alert('🎉 API Connection Successful!\n\n' + result.message);
+            } catch (error) {
+                alert('❌ API Connection Failed: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
