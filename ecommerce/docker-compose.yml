@@ -26,6 +26,7 @@ services:
         condition: service_healthy
     environment:
       - DATABASE_URL=postgres://postgres:postgres@user_db:5432/user_service_db
+      - POSTGRES_PASSWORD=postgres
 
   order_service:
     build:
@@ -38,6 +39,7 @@ services:
         condition: service_healthy
     environment:
       - DATABASE_URL=postgres://postgres:postgres@order_db:5432/order_service_db
+      - POSTGRES_PASSWORD=postgres
 
   user_db:
     image: postgres:13
